@@ -19,10 +19,10 @@ export default function Index() {
                 <img class='w-48 h-48 rounded-l-xs rounded-r-xs' src='https://placehold.co/400' />
               </div>
               <div class='space-x-2 flex flex-row justify-end'>
-                <a class='rounded-xs decoration-dotted underline hover:bg-[#1B1F24] transition-colors ease-out duration-100 bg-black w-6 h-6 min-w-6 min-h-6' href='https://github.com/maxinedeandrade'><img src='/github.svg' class='w-4 h-4 invert m-1' /></a>
-                <a class='rounded-xs decoration-dotted underline hover:bg-[#e2432a] transition-colors ease-out duration-100 bg-black w-6 h-6 min-w-6 min-h-6' href='https://gitlab.com/maxinedeandrade'><img src='/gitlab.svg' class='w-4 h-4 invert m-1' /></a>
+                <a class='rounded-xs decoration-dotted underline hover:bg-[#1B1F24] transition-colors ease-out duration-100 bg-black w-8 h-8 min-w-8 min-h-8' href='https://github.com/maxinedeandrade'><img src='/github.svg' class='w-5 h-5 invert m-1.5' /></a>
+                <a class='rounded-xs decoration-dotted underline hover:bg-[#e2432a] transition-colors ease-out duration-100 bg-black w-8 h-8 min-w-8 min-h-8' href='https://gitlab.com/maxinedeandrade'><img src='/gitlab.svg' class='w-5 h-5 invert m-1.5' /></a>
                 <a class='rounded-sm' href='https://youtube.com/@mdeandrade'>
-                  <svg class='w-6 h-6 transition-colors ease-out duration-100 hover:fill-red-600 rounded-xs' fill="#000000" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                  <svg class='w-8 h-8 transition-colors ease-out duration-100 hover:fill-red-600 rounded-xs' fill="#000000" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                     viewBox="-143 145 512 512" xml:space="preserve">
                     <g>
                       <polygon points="78.9,450.3 162.7,401.1 78.9,351.9 	" />
@@ -32,7 +32,7 @@ export default function Index() {
                   </svg>
                 </a>
                 <a class='rounded-sm' href='https://www.linkedin.com/in/maxine-deandrade-11117b352/'>
-                  <svg class='w-6 h-6 transition-colors ease-out duration-100 hover:fill-[#2164f4] rounded-xs' fill="#000000" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                  <svg class='w-8 h-8 transition-colors ease-out duration-100 hover:fill-[#2164f4] rounded-xs' fill="#000000" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                     viewBox="-143 145 512 512" xml:space="preserve">
                     <path d="M-143,145v512h512V145H-143z M41.4,508.1H-8.5V348.4h49.9V508.1z M15.1,328.4h-0.4c-18.1,0-29.8-12.2-29.8-27.7
 	c0-15.8,12.1-27.7,30.5-27.7c18.4,0,29.7,11.9,30.1,27.7C45.6,316.1,33.9,328.4,15.1,328.4z M241,508.1h-56.6v-82.6
@@ -55,7 +55,7 @@ export default function Index() {
                     Software engineer with a passion for formal verification and systems programming, ardently <br />
                     exploring pure mathematics in my free time. <br /> <br />
                   </span>
-                  ♡ Talk to me about HoTT, CuTT, Type Theory and Category Theory! ♡
+                  ♡ Talk to me about HoTT, CuTT, Martin-Löf Type Theory and Category Theory! ♡
                 </p>
               </div>
               <div class=''>
