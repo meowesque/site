@@ -16,12 +16,12 @@ export default function Index() {
           <div>
             <div class='xl:max-w-2/3 space-y-6'>
               <div class='space-y-1'>
-                <h1 class='font-light text-6xl'>Maxine DeAndrade</h1>
+                <h1 class='font-semilight text-4xl'>Maxine DeAndrade</h1>
                 <span class="font-ubuntu-sans-mono block text-medium pl-1">(λ<span class="text-[#B06DBF]">x</span>.λ<span class="text-[#729FE4]">y</span>.&lt;<span class="text-[#B06DBF]">x</span>@<span class="text-[#729FE4]">y</span>.com&gt;) <span class="text-[#B06DBF]">deandrade</span> <span class="text-[#729FE4]">posteo</span></span>
                 <span class='block text-sm pl-1 pt-1'>he/she</span>
               </div>
               <About />
-              <h1 class='font-semilight text-5xl'>Posts</h1>
+              <h1 class='font-semilight text-3xl'>Posts</h1>
             </div>
           </div>
         </div>
