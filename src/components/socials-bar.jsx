@@ -1,17 +1,17 @@
 export default function SocialsBar() {
   return (
     <div class='flex justify-between w-1/5 flex-col md:flex-row md:w-full md:space-y-0 md:size-16'>
-      <a class='rounded-xs hover:bg-[#1B1F24] transition-colors ease-out duration-100 bg-black aspect-square grid items-center'
+      <a class='rounded-xs hover:bg-[#1B1F24] transition-colors ease-out group duration-100 bg-white aspect-square grid items-center'
         href='https://github.com/maxinedeandrade'>
-        <img src='/github.svg' class='w-3/5 h-3/5 invert mx-auto' />
+        <img src='/github.svg' class='w-3/5 h-3/5 mx-auto group-hover:invert' />
       </a>
-      <a class='rounded-xs hover:bg-[#e2432a] transition-colors ease-out duration-100 bg-black aspect-square grid items-center'
+      <a class='rounded-xs hover:bg-[#e2432a] transition-colors ease-out duration-100 bg-white group aspect-square grid items-center'
         href='https://gitlab.com/maxinedeandrade'>
-        <img src='/gitlab.svg' class='w-3/5 h-3/5 invert mx-auto' />
+        <img src='/gitlab.svg' class='w-3/5 h-3/5 mx-auto group-hover:invert ' />
       </a>
       <a class='aspect-square grid items-center' href='https://youtube.com/@mdeandrade'>
         <svg
-          class='rounded-xs transition-colors ease-out duration-100 hover:fill-red-600 mx-auto w-full h-full'
+          class='rounded-xs transition-colors ease-out duration-100 hover:fill-red-600 hover:bg-white mx-auto w-full h-full fill-white'
           fill="#000000"
           height="800px"
           width="800px"
@@ -29,7 +29,7 @@ export default function SocialsBar() {
       </a>
       <a class='aspect-square grid items-center' href='https://www.linkedin.com/in/maxine-deandrade-11117b352/'>
         <svg
-          class='rounded-xs transition-colors ease-out duration-100 hover:fill-[#2164f4] mx-auto w-full h-full'
+          class='rounded-xs transition-colors ease-out duration-100 hover:fill-[#2164f4] hover:bg-white mx-auto w-full h-full fill-white'
           fill="#000000"
           height="800px"
           width="800px"

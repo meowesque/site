@@ -7,21 +7,23 @@ import './index.css'
 export default function Index() {
   return (
     <>
-      <div class='container mx-auto px-4 sm:p-0'>
-        <div class='flex flex-col w-full pt-8 space-y-6 md:flex-row md:space-y-0 md:space-x-8'>
-          <div class='flex flex-row justify-apart h-1/3 w-full space-x-6 md:flex-col md:min-w-72 md:w-72 md:justify-none md:space-x-0 md:space-y-8'>
-            <Profile />
-            <SocialsBar />
-          </div>
-          <div>
-            <div class='xl:max-w-2/3 space-y-6'>
-              <div class='space-y-1'>
-                <h1 class='font-semilight text-4xl'>Maxine DeAndrade</h1>
-                <span class="font-ubuntu-sans-mono block text-medium pl-1">(λ<span class="text-[#B06DBF]">x</span>.λ<span class="text-[#729FE4]">y</span>.&lt;<span class="text-[#B06DBF]">x</span>@<span class="text-[#729FE4]">y</span>.com&gt;) <span class="text-[#B06DBF]">deandrade</span> <span class="text-[#729FE4]">posteo</span></span>
-                <span class='block text-sm pl-1 pt-1'>he/she</span>
+      <div class='min-h-screen bg-black text-white'>
+        <div class='container mx-auto px-4 sm:p-0'>
+          <div class='flex flex-col w-full pt-8 space-y-6 md:flex-row md:space-y-0 md:space-x-8'>
+            <div class='flex flex-row justify-apart h-1/3 w-full space-x-6 md:flex-col md:min-w-72 md:w-72 md:justify-none md:space-x-0 md:space-y-8'>
+              <Profile />
+              <SocialsBar />
+            </div>
+            <div>
+              <div class='xl:max-w-2/3 space-y-6'>
+                <div class='space-y-1'>
+                  <h1 class='font-semilight text-4xl'>Maxine DeAndrade</h1>
+                  <span class="font-ubuntu-sans-mono block text-medium pl-1">(λ<span class="text-[#B06DBF]">x</span>.λ<span class="text-[#729FE4]">y</span>.&lt;<span class="text-[#B06DBF]">x</span>@<span class="text-[#729FE4]">y</span>.com&gt;) <span class="text-[#B06DBF]">deandrade</span> <span class="text-[#729FE4]">posteo</span></span>
+                  <span class='block text-sm pl-1 pt-1'>he/she</span>
+                </div>
+                <About />
+                <h1 class='font-semilight text-3xl'>Posts</h1>
               </div>
-              <About />
-              <h1 class='font-semilight text-3xl'>Posts</h1>
             </div>
           </div>
         </div>
