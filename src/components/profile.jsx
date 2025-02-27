@@ -8,7 +8,7 @@ export default function Profile() {
         <div class='h-1/5 bg-[#B06DBF]'></div>
         <div class='h-1/5 rounded-bl-xs bg-[#729FE4]'></div>
       </div>
-      <img class='aspect-square w-full h-full rounded-r-xs' src='https://placehold.co/400' />
+      <img class='aspect-square w-full h-full rounded-xs' src='https://placehold.co/400' />
     </div>
   )
 }
