@@ -9,7 +9,7 @@ export default function SocialsBar() {
         href='https://gitlab.com/maxinedeandrade'>
         <img src='/gitlab.svg' class='w-3/5 h-3/5 mx-auto group-hover:invert ' />
       </a>
-      <a class='aspect-square h-full w-min grid items-center' href='https://youtube.com/@mdeandrade'>
+      <a class='aspect-square sm:size-auto md:h-full md:w-min grid items-center' href='https://youtube.com/@mdeandrade'>
         <svg
           class='rounded-xs transition-colors ease-out duration-100 hover:fill-red-600 hover:bg-white size-full fill-white'
           fill="#000000"
@@ -27,7 +27,7 @@ export default function SocialsBar() {
           </g>
         </svg>
       </a>
-      <a class='aspect-square grid h-full w-min items-center' href='https://www.linkedin.com/in/maxine-deandrade-11117b352/'>
+      <a class='aspect-square grid sm:size-auto md:h-full md:w-min items-center' href='https://www.linkedin.com/in/maxine-deandrade-11117b352/'>
         <svg
           class='rounded-xs transition-colors ease-out duration-100 hover:fill-[#2164f4] hover:bg-white mx-auto size-full fill-white'
           fill="#000000"
