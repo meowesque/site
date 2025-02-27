@@ -22,7 +22,14 @@ export default function Index() {
                   <span class='block text-sm pt-1'>(he/she)</span>
                 </div>
                 <About />
-                <h1 class='font-semilight text-3xl pt-1'>Posts</h1>
+                <div class='flex items-center space-x-2'>
+                  <a href='/posts' class='w-6 h-6 pt-0.5'><img src='/link.svg' class='invert'/></a>
+                  <h2 class='font-semilight text-3xl pt-1'>Posts</h2>
+                </div>
+                <div class='flex items-center space-x-2'>
+                  <a href='/zettelkasten' class='w-6 h-6 pt-0.5'><img src='/link.svg' class='invert'/></a>
+                  <h2 class='font-semilight text-3xl pt-1'>Zettelkasten</h2>
+                </div>
               </div>
             </div>
           </div>
