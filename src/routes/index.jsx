@@ -2,14 +2,15 @@ import About from '../components/about'
 import CupDonutHomo from '../components/cup-donut-homo'
 import Profile from '../components/profile'
 import SocialsBar from '../components/socials-bar'
+import Post from '../components/post'
 import './index.css'
 
 export default function Index() {
   return (
     <>
-      <div class='min-h-screen bg-black text-white'>
+      <div class='min-h-screen bg-black text-white py-8'>
         <div class='container mx-auto px-4 sm:p-0'>
-          <div class='flex flex-col w-full py-8 space-y-6 md:flex-row md:space-y-0 md:space-x-8'>
+          <div class='flex flex-col w-full space-y-6 md:flex-row md:space-y-0 md:space-x-8'>
             <div class='flex flex-row justify-apart h-1/3 w-full space-x-6 md:flex-col md:min-w-72 md:w-72 md:justify-none md:space-x-0 md:space-y-8'>
               <Profile />
               <SocialsBar />
@@ -22,14 +23,22 @@ export default function Index() {
                   <span class='block text-sm pt-1'>(he/she)</span>
                 </div>
                 <About />
-                <div class='flex items-center space-x-2'>
-                  <a href='/posts' class='w-6 h-6 pt-0.5'><img src='/link.svg' class='invert'/></a>
-                  <h2 class='font-semilight text-3xl pt-1'>Posts</h2>
+                <div class='space-y-2'>
+                  <a class='flex items-center space-x-2' href='/posts'>
+                    <img src='/link.svg' class='invert w-6 h-6 pt-1'/>
+                    <span class='font-semilight text-3xl pt-1'>Posts</span>
+                  </a>
+                  <div class='space-y-2'>
+                    <Post 
+                      date='2025/01/27'
+                      title='QUIC and Actors with Tokio' 
+                      filename='server-architecture-quic-and-actors-with-tokio'/>
+                  </div>
                 </div>
-                <div class='flex items-center space-x-2'>
-                  <a href='/zettelkasten' class='w-6 h-6 pt-0.5'><img src='/link.svg' class='invert'/></a>
-                  <h2 class='font-semilight text-3xl pt-1'>Zettelkasten</h2>
-                </div>
+                <a class='flex items-center space-x-2' href='/zettelkasten'>
+                  <img src='/link.svg' class='invert w-6 h-6 pt-1'/>
+                  <span class='font-semilight text-3xl pt-1'>Zettelkasten</span>
+                </a>
               </div>
             </div>
           </div>
