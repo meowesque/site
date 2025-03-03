@@ -4,9 +4,45 @@
 
 After discovering [A. Rhyl, Actors with Tokio](https://ryhl.io/blog/actors-with-tokio/) in my search of architecting servers in a more modular way via common encapsulation patterns, I was delighted to finally find something that helped me understand the bigger picture. This resource made me rethink server architecture and provided valuable insights into the use of actors with Tokio. The explanations were clear, and the examples were practical, making it an excellent starting point for anyone interested in this topic. However, while it was incredibly informative, I found it did not fully satisfy my needs in my endeavors. I was left wanting more detailed guidance and advanced techniques to further enhance my server architecture.
 
+## Comparison of QUIC and TCP 
+
+If you're not familiar with the Quick UDP Internet Connections (QUIC), it's a secure by default protocol that aims to improve some problems with and replace TCP for certain applications.
+
+Let's first look at TCP, so we can understand the major differences between the two protocols. 
+
+```mermaid
+sequenceDiagram
+  autonumber
+  participant Client (TCP)
+  participant Server (TCP)
+  alt TCP Handshake
+    Client (TCP) ->> Server (TCP): SYN 
+    Server (TCP) -->> Client (TCP): SYN + ACK
+    Client (TCP) ->> Server (TCP): ACK, Hello
+  end
+  alt TLS 1.2 Handshake
+    Server (TCP) -->> Client (TCP): Hello, Cert, SKEx
+    Client (TCP) ->> Server (TCP): CKEx, CCS
+    Server (TCP) -->> Client (TCP): CCS 
+  end
+  Client (TCP) ->> Server (TCP): Data
+```
+
+```mermaid
+sequenceDiagram
+  autonumber
+  participant Client (QUIC)
+  participant Server (QUIC)
+  alt QUIC Handshake
+    Client (QUIC) ->> Server (QUIC): Initial, Hello
+    Server (QUIC) -->> Client (QUIC): Hello, Cert
+  end
+  Client (QUIC) ->> Server (QUIC): Data
+```
+
 ## Actors with Tokio
 
-The gist of [A. Rhyl, Actors with Tokio](https://ryhl.io/blog/actors-with-tokio/) is how an actor is split into a handle (also referred to as a proxy) and the task. Typically the "task" is an I/O operation that the handle communicates with, providing a simple interface for the programmer whilst keeping everything decoupled. Let's first look a simple (pure) actor and actor handle that doesn't actually interact with the "outside world," merely producing naturals incrementally:
+The gist of [A. Rhyl, Actors with Tokio](https://ryhl.io/blog/actors-with-tokio/) is how an actor is split into a handle (also referred to as a proxy) and the task. Typically the task is an I/O operation that the handle communicates with, providing a simple interface for the programmer whilst keeping everything decoupled. Let's first look a simple (pure) actor and handle that doesn't actually interact with the "outside world," merely producing naturals incrementally:
 
 ### Actor Implementation
 
@@ -91,5 +127,11 @@ In the method `Actor::run` we take ownership of the actor, wait for incoming mes
 
 Within the `Actor::update` method, we intentionally ignore the possibility of an error if we fail to send our response. Again, we presume any receiver has been dropped. So we'll just pretend like nothing happened.
 
-## Getting started with [quinn](https://crates.io/crates/quinn)
+## Getting Started with [quinn](https://crates.io/crates/quinn)
+
+The example project can be found [here](https://github.com/maxinedeandrade/quic-and-actors-with-tokio). 
+
+Now that we have a basic idea of what an actor looks like, let's build a basic server with QUIC. 
+
+## Resources
 
