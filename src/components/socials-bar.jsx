@@ -27,7 +27,7 @@ export default function SocialsBar() {
           </g>
         </svg>
       </a>
-      <a class='aspect-square grid sm:size-auto md:h-full md:w-min items-center' href='https://www.linkedin.com/in/maxine-deandrade-11117b352/'>
+      <a class='aspect-square grid sm:size-auto md:h-full md:w-min items-center' href='https://www.linkedin.com/in/maxinedeandrade/'>
         <svg
           class='rounded-xs transition-colors ease-out duration-100 hover:fill-[#2164f4] hover:bg-white mx-auto size-full fill-white'
           fill="#000000"
