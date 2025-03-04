@@ -24,19 +24,19 @@ export default function Index() {
                 </div>
                 <About />
                 <div class='space-y-2'>
-                  <a class='flex items-center space-x-2' href='/posts'>
-                    <img src='/link.svg' class='invert w-6 h-6 pt-1'/>
+                  <a class='flex items-center space-x-2' href='/#/posts'>
+                    <img src='/link.svg' class='invert w-6 h-6 pt-1' />
                     <span class='font-semilight text-3xl pt-1'>Posts</span>
                   </a>
                   <div class='space-y-2'>
-                    <Post 
+                    <Post
                       date='2025/01/27'
-                      title='QUIC and Actors with Tokio' 
-                      filename='quic-and-actors-with-tokio'/>
+                      title='QUIC and Actors with Tokio'
+                      filename='quic-and-actors-with-tokio' />
                   </div>
                 </div>
-                <a class='flex items-center space-x-2' href='/zettelkasten'>
-                  <img src='/link.svg' class='invert w-6 h-6 pt-1'/>
+                <a class='flex items-center space-x-2' href='/#/zettelkasten'>
+                  <img src='/link.svg' class='invert w-6 h-6 pt-1' />
                   <span class='font-semilight text-3xl pt-1'>Zettelkasten</span>
                 </a>
               </div>

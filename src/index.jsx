@@ -1,7 +1,7 @@
 /* @refresh reload */
 import { lazy } from "solid-js";
 import { render } from 'solid-js/web'
-import { Router } from '@solidjs/router'
+import { HashRouter } from '@solidjs/router'
 
 const routes = [
   {
@@ -15,6 +15,6 @@ const routes = [
 ]
 
 render(
-  () => <Router>{routes}</Router>,
+  () => <HashRouter>{routes}</HashRouter>,
   document.getElementById('root')
 )
