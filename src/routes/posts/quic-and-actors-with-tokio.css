@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap');
+@import "tailwindcss";
+
+@layer base {
+  html {
+    font-family: 'Raleway', sans-serif;
+  }
+}
+
+@theme {
+  --font-ubuntu-sans-mono: "Ubuntu Sans Mono", monospace;
+}
+
+.markdown-body {
+  @apply py-12 px-2 space-y-6;
+}
+
+h1 {
+  @apply text-4xl font-bold pt-6 pb-1;
+}
+
+h2 {
+  @apply text-2xl font-bold pt-2 pb-1;
+}
+
+h3 {
+  @apply text-xl font-bold pt-2 pb-1;
+}
+
+code.language-rust {
+  @apply border-l-1 border-white pl-8;
+}
+
+a {
+  @apply underline;
+}
+
+img {
+  @apply object-cover w-full rounded-xs h-120 object-center;
+}
+
+.language-mermaid {
+  @apply flex flex-col justify-center items-center;
+}

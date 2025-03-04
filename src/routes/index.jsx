@@ -32,7 +32,7 @@ export default function Index() {
                     <Post 
                       date='2025/01/27'
                       title='QUIC and Actors with Tokio' 
-                      filename='server-architecture-quic-and-actors-with-tokio'/>
+                      filename='quic-and-actors-with-tokio'/>
                   </div>
                 </div>
                 <a class='flex items-center space-x-2' href='/zettelkasten'>

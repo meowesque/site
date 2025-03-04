@@ -8,6 +8,10 @@ const routes = [
     path: "/",
     component: lazy(() => import("./routes/index.jsx")),
   },
+  {
+    path: "/posts/quic-and-actors-with-tokio",
+    component: lazy(() => import("./routes/posts/quic-and-actors-with-tokio.jsx")),
+  }
 ]
 
 render(

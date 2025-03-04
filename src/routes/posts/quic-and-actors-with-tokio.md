@@ -1,44 +1,8 @@
-![Puppy Programmer](/public/dog-programmer.png "Puppy Programmer")
+![Puppy Programmer](/dog-programmer.png "Puppy Programmer")
 
 # QUIC and Actors with Tokio
 
 After discovering [A. Rhyl, Actors with Tokio](https://ryhl.io/blog/actors-with-tokio/) in my search of architecting servers in a more modular way via common encapsulation patterns, I was delighted to finally find something that helped me understand the bigger picture. This resource made me rethink server architecture and provided valuable insights into the use of actors with Tokio. The explanations were clear, and the examples were practical, making it an excellent starting point for anyone interested in this topic. However, while it was incredibly informative, I found it did not fully satisfy my needs in my endeavors. I was left wanting more detailed guidance and advanced techniques to further enhance my server architecture.
-
-## Comparison of QUIC and TCP 
-
-If you're not familiar with the Quick UDP Internet Connections (QUIC), it's a secure by default protocol that aims to improve some problems with and replace TCP for certain applications.
-
-Let's first look at TCP, so we can understand the major differences between the two protocols. 
-
-```mermaid
-sequenceDiagram
-  autonumber
-  participant Client (TCP)
-  participant Server (TCP)
-  alt TCP Handshake
-    Client (TCP) ->> Server (TCP): SYN 
-    Server (TCP) -->> Client (TCP): SYN + ACK
-    Client (TCP) ->> Server (TCP): ACK, Hello
-  end
-  alt TLS 1.2 Handshake
-    Server (TCP) -->> Client (TCP): Hello, Cert, SKEx
-    Client (TCP) ->> Server (TCP): CKEx, CCS
-    Server (TCP) -->> Client (TCP): CCS 
-  end
-  Client (TCP) ->> Server (TCP): Data
-```
-
-```mermaid
-sequenceDiagram
-  autonumber
-  participant Client (QUIC)
-  participant Server (QUIC)
-  alt QUIC Handshake
-    Client (QUIC) ->> Server (QUIC): Initial, Hello
-    Server (QUIC) -->> Client (QUIC): Hello, Cert
-  end
-  Client (QUIC) ->> Server (QUIC): Data
-```
 
 ## Actors with Tokio
 
@@ -83,8 +47,6 @@ impl Actor {
 }
 ```
 
-[Full example](PUT.GIST.HERE)
-
 ### Handle Implementation
 
 ```rust
@@ -119,8 +81,6 @@ impl Handle {
 }
 ```
 
-[Full example](PUT.GIST.HERE)
-
 We utilize `tokio::sync::mpsc`, a multi-producer, single consumer channel. Meaning, there can only exist one consumer (our actor) and there can be many producers (clones of our actor handle).
 
 In the method `Actor::run` we take ownership of the actor, wait for incoming messages indefinitely. If at any point `self.rx.recv()` returns `Option::None` it's presumed that all senders to our receiver have been dropped, we then gracefully shut down.
@@ -131,7 +91,238 @@ Within the `Actor::update` method, we intentionally ignore the possibility of an
 
 The example project can be found [here](https://github.com/maxinedeandrade/quic-and-actors-with-tokio). 
 
-Now that we have a basic idea of what an actor looks like, let's build a basic server with QUIC. 
+Now that we have a basic idea of what an actor looks like, let's build a basic server with QUIC!
 
-## Resources
+Our server will be broken into several pieces:
 
+  - [Listener](#listener) Accepts incoming clients and sets up our actors. 
+  - [Inbound](#inbound) Recieves incoming messages from the client.
+  - [Outbound](#outbound) Sends messages to the client.
+  - [Dispatch](#dispatch) Handles each client message and acts as a switch for each actors.
+
+Splitting our actors up into very basic responsibilities is convenient for multiple reasons:
+
+  - The architecture of the server becomes far more reasonable to work with when amassing more complex tasks.
+  - Legibility is increased given that the effects of an actor is much more apparent in contrast to a monolithic design.
+  - Actors provide a form of state encapsulation, keeping moving parts consolidated.
+  - Decoupling provides easier error recovery without sacrificing simplicity.
+
+### Listener
+
+```rust
+struct Actor {
+  endpoint: quinn::Endpoint,
+}
+
+impl Actor {
+  async fn run(mut self) {
+    while let Some(incoming) = self.endpoint.accept().await {
+      log::info!("Accepting connection from {}", incoming.remote_address());
+
+      tokio::spawn(async move {
+        // Accept bidirectional channels from the incoming connection
+        let (send, recv) = incoming
+          .await
+          .expect("Failed to accept incoming connection")
+          .accept_bi()
+          .await
+          .expect("Failed to accept a bidirectional stream");
+
+        let outbound = outbound::Handle::new(send);
+        let dispatch = dispatch::Handle::new(outbound);
+        let inbound = inbound::Handle::new(recv, dispatch);
+
+        inbound.join().await;
+      });
+    }
+  }
+}
+
+pub struct Handle {
+  join_handle: task::JoinHandle<()>,
+}
+
+impl Handle {
+  pub fn new(endpoint: quinn::Endpoint) -> Self {
+    let actor = Actor { endpoint };
+
+    let join_handle = tokio::spawn(async move { actor.run().await });
+
+    Self { join_handle }
+  }
+
+  /// Wait for the listener to terminate.
+  pub async fn join(self) {
+    self.join_handle.await.expect("Listener actor panicked");
+  }
+}
+```
+
+[Source](https://github.com/maxinedeandrade/quic-and-actors-with-tokio/blob/main/crates/server/src/actors/listener.rs)
+
+Within `Actor::run` whenever we accept an incomming connection, we'll accept bidirectional channels to seperate recieving and sending data into two actors: [Inbound](#inbound) and [Outbound](#outbound). The [inbound actor](#inbound) will be equipped with its own newly created [dispatch](#dispatch) actor handle.
+
+### Inbound
+
+```rust
+const CHANNEL_SIZE: usize = 8;
+const BUFFER_SIZE: usize = 1024 * 8;
+
+struct Actor {
+  stream: quinn::RecvStream,
+  dispatch: dispatch::Handle,
+}
+
+impl Actor {
+  async fn run(mut self) {
+    let mut buffer = Box::new([0u8; BUFFER_SIZE]);
+
+    loop {
+      match self
+        .stream
+        .read(buffer.as_mut())
+        .await
+        .expect("Failed to read stream")
+      {
+        Some(0) | None => continue,
+        Some(read) => {
+          let client_message =
+            bitcode::decode(&buffer[..read]).expect("Failed to decode ClientMessage");
+
+          self.dispatch.send(client_message).await;
+        }
+      }
+    }
+  }
+}
+
+pub struct Handle {
+  join_handle: task::JoinHandle<()>,
+}
+
+impl Handle {
+  pub fn new(stream: quinn::RecvStream, dispatch: dispatch::Handle) -> Self {
+    let actor = Actor { stream, dispatch };
+
+    let join_handle = tokio::spawn(async move { actor.run().await });
+
+    Self { join_handle }
+  }
+
+  /// Wait for the actor to finish processing inbound messages.
+  pub async fn join(self) {
+    self.join_handle.await.expect("Failed to join actor");
+  }
+}
+```
+
+[Source](https://github.com/maxinedeandrade/quic-and-actors-with-tokio/blob/main/crates/server/src/actors/inbound.rs)
+
+This our first seemingly complex actor, the goal here is to receive incoming data and deserialize it with [bitcode](crates.io/crates/bitcode) and send it off to be dispatched. Any deserialization crate (like [bincode](crates.io/crates/bincode)) will do. For performance and memory efficient applications that need to scale, [bitcode](crates.io/crates/bitcode) may be preferrable.  
+
+### Outbound
+
+```rust
+const CHANNEL_SIZE: usize = 8;
+
+struct Actor {
+  stream: quinn::SendStream,
+  rx: mpsc::Receiver<proto::server::Message>,
+}
+
+impl Actor {
+  async fn run(mut self) {
+    while let Some(msg) = self.rx.recv().await {
+      self.send(msg).await;
+    }
+  }
+
+  async fn send(&mut self, message: proto::server::Message) {
+    let buffer = bitcode::encode(&message);
+
+    self
+      .stream
+      .write_all(&buffer)
+      .await
+      .expect("Failed to write message to stream");
+
+    self.stream.flush().await.expect("Failed to flush stream");
+  }
+}
+
+#[derive(Clone)]
+pub struct Handle {
+  tx: mpsc::Sender<proto::server::Message>,
+}
+
+impl Handle {
+  pub fn new(stream: quinn::SendStream) -> Self {
+    let (tx, rx) = mpsc::channel(CHANNEL_SIZE);
+
+    tokio::spawn(Actor { stream, rx }.run());
+
+    Self { tx }
+  }
+
+  pub async fn send(&self, message: proto::server::Message) {
+    self
+      .tx
+      .send(message)
+      .await
+      .expect("Failed to send message");
+  }
+}
+```
+
+[Source](https://github.com/maxinedeandrade/quic-and-actors-with-tokio/blob/main/crates/server/src/actors/outbound.rs)
+
+This actor is trivial, existing only to encode messages and send them to the client.
+
+### Dispatch
+
+```rust
+const CHANNEL_SIZE: usize = 16;
+
+struct Actor {
+  rx: mpsc::Receiver<proto::client::Message>,
+  outbound: outbound::Handle,
+}
+
+impl Actor {
+  async fn run(mut self) {
+    while let Some(message) = self.rx.recv().await {
+      log::info!("Received message: {:?}", message);
+
+      // Match on message, communicate with other actors, etc.
+    }
+  }
+}
+
+#[derive(Clone)]
+pub struct Handle {
+  tx: mpsc::Sender<proto::client::Message>,
+}
+
+impl Handle {
+  pub fn new(outbound: outbound::Handle) -> Self {
+    let (tx, rx) = mpsc::channel(CHANNEL_SIZE);
+    let actor = Actor { rx, outbound };
+
+    tokio::spawn(async move { actor.run().await });
+
+    Self { tx }
+  }
+
+  pub async fn send(&self, message: proto::client::Message) {
+    self
+      .tx
+      .send(message)
+      .await
+      .expect("Failed to send actor a message");
+  }
+}
+```
+
+[Source](https://github.com/maxinedeandrade/quic-and-actors-with-tokio/blob/main/crates/server/src/actors/dispatch.rs)
+
+The purpose of this actor is to only communicate with other actors, possibly even keeping track of certain events (like authentication) out of pure convenience for the programmer.
