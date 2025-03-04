@@ -32,7 +32,7 @@ export default function Index() {
                   </A>
                   <div class='space-y-2'>
                     <Post
-                      date='2025/01/27'
+                      date='2025/02/27'
                       title='QUIC and Actors with Tokio'
                       filename='quic-and-actors-with-tokio' />
                   </div>

@@ -6,22 +6,22 @@ After discovering [A. Rhyl, Actors with Tokio](https://ryhl.io/blog/actors-with-
 
 ## Actors with Tokio
 
-The gist of [A. Rhyl, Actors with Tokio](https://ryhl.io/blog/actors-with-tokio/) is how an actor is split into a handle (also referred to as a proxy) and the task. Typically the task is an I/O operation that the handle communicates with, providing a simple interface for the programmer whilst keeping everything decoupled. Let's first look a simple (pure) actor and handle that doesn't actually interact with the "outside world," merely producing naturals incrementally:
-
-### Actor Implementation
+The gist of [A. Rhyl, Actors with Tokio](https://ryhl.io/blog/actors-with-tokio/) is how an actor is split into a handle (also referred to as a proxy) and the task. Typically the task is an I/O operation that the handle communicates with, providing a simple interface for the programmer whilst keeping everything decoupled. For example let's first look a simple (pure) actor and handle that doesn't actually interact with the "outside world," merely producing naturals incrementally:
 
 ```rust
+use tokio::sync::{oneshot, mpsc};
+
 enum Msg {
-  Next(tokio::sync::oneshot::Sender<u64>),
+  Next(oneshot::Sender<u64>),
 }
 
 struct Actor {
   id: u64,
-  rx: tokio::sync::mpsc::Receiver<Msg>,
+  rx: mpsc::Receiver<Msg>,
 }
 
 impl Actor {
-  fn new(rx: tokio::sync::mpsc::Receiver<Msg>) -> Self {
+  fn new(rx: mpsc::Receiver<Msg>) -> Self {
     Self { 
       id: 0,
       rx,
@@ -46,6 +46,12 @@ impl Actor {
   }
 }
 ```
+
+Initially, you may recognize that this follows a reactive pattern - and you'd be right! This is where the implementation of the task lies. 
+
+In the method `Actor::run` we take ownership of the actor, wait for incoming messages indefinitely. If at any point `self.rx.recv()` returns `Option::None` it's presumed that all senders to our receiver have been dropped, we then gracefully shut down.
+
+Within the `Actor::update` method, we intentionally ignore the possibility of an error if we fail to send our response. Again, we presume any receiver has been dropped. So we'll just pretend like nothing happened.
 
 ### Handle Implementation
 
@@ -81,31 +87,32 @@ impl Handle {
 }
 ```
 
-We utilize `tokio::sync::mpsc`, a multi-producer, single consumer channel. Meaning, there can only exist one consumer (our actor) and there can be many producers (clones of our actor handle).
+This is the actor's handle, responsible for spawning a task of which the actor resides, communicating with the actor and providing an interface for the programmer.
 
-In the method `Actor::run` we take ownership of the actor, wait for incoming messages indefinitely. If at any point `self.rx.recv()` returns `Option::None` it's presumed that all senders to our receiver have been dropped, we then gracefully shut down.
+## Integrating Our Actors with [quinn](https://crates.io/crates/quinn)
 
-Within the `Actor::update` method, we intentionally ignore the possibility of an error if we fail to send our response. Again, we presume any receiver has been dropped. So we'll just pretend like nothing happened.
+The example project can be found [here](https://github.com/maxinedeandrade/quic-and-actors-with-tokio), where you can find the implementation of the client as well, I haven't included it here given that both the server and the client have nearly identical code when it comes to the actors listed below. 
 
-## Getting Started with [quinn](https://crates.io/crates/quinn)
+Now that we have a basic idea of what an actor looks like, let's build a basic server with QUIC! Our server will be broken into several pieces:
 
-The example project can be found [here](https://github.com/maxinedeandrade/quic-and-actors-with-tokio). 
+  * [Listener](#listener) Accepts incoming clients and sets up our actors. 
 
-Now that we have a basic idea of what an actor looks like, let's build a basic server with QUIC!
+  * [Inbound](#inbound) Recieves incoming messages from the client.
 
-Our server will be broken into several pieces:
+  * [Outbound](#outbound) Sends messages to the client.
 
-  - [Listener](#listener) Accepts incoming clients and sets up our actors. 
-  - [Inbound](#inbound) Recieves incoming messages from the client.
-  - [Outbound](#outbound) Sends messages to the client.
-  - [Dispatch](#dispatch) Handles each client message and acts as a switch for each actors.
+  * [Dispatch](#dispatch) Handles each client message and acts as a switch for each actors.
 
 Splitting our actors up into very basic responsibilities is convenient for multiple reasons:
 
-  - The architecture of the server becomes far more reasonable to work with when amassing more complex tasks.
-  - Legibility is increased given that the effects of an actor is much more apparent in contrast to a monolithic design.
-  - Actors provide a form of state encapsulation, keeping moving parts consolidated.
-  - Decoupling provides easier error recovery without sacrificing simplicity.
+  * The architecture of the server becomes far more reasonable to work with when amassing more complex tasks.
+  
+  * Legibility is increased given that the effects of an actor is much more apparent in contrast to a monolithic 
+  design.
+
+  * Actors provide a form of state encapsulation, keeping moving parts consolidated.
+
+  * Decoupling provides easier error recovery without sacrificing simplicity.
 
 ### Listener
 
@@ -258,8 +265,9 @@ pub struct Handle {
 impl Handle {
   pub fn new(stream: quinn::SendStream) -> Self {
     let (tx, rx) = mpsc::channel(CHANNEL_SIZE);
+    let actor = Acotr { stream, rx };
 
-    tokio::spawn(Actor { stream, rx }.run());
+    tokio::spawn(async move { actor.run() });
 
     Self { tx }
   }
@@ -276,7 +284,7 @@ impl Handle {
 
 [Source](https://github.com/maxinedeandrade/quic-and-actors-with-tokio/blob/main/crates/server/src/actors/outbound.rs)
 
-This actor is trivial, existing only to encode messages and send them to the client.
+This actor is trivial, existing only to encode messages and send them to the channel.
 
 ### Dispatch
 
@@ -325,4 +333,16 @@ impl Handle {
 
 [Source](https://github.com/maxinedeandrade/quic-and-actors-with-tokio/blob/main/crates/server/src/actors/dispatch.rs)
 
-The purpose of this actor is to only communicate with other actors, possibly even keeping track of certain events (like authentication) out of pure convenience for the programmer.
+The purpose of this actor is to only communicate with other actors, possibly even keeping track of certain events (like authentication).
+
+## Improvements
+
+Overall, there are a few things I would want to improve in a production scenario:
+
+  * Buffering the outbound actor, saving flush times. This could be especially critical for high throughput scenarios.
+
+  * Utilize chunking on the inbound actor for handling potentially large portions of data.
+
+  * Tracking each client handle within the listener actor.
+
+Regardless, I've been really enjoying my experience implementing actors with [tokio](crates.io/crates/tokio) and [quinn](crates.io/crates/quinn).
