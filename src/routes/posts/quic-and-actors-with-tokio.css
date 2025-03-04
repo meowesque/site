@@ -15,30 +15,30 @@
   @apply py-12 px-2 space-y-6;
 }
 
-h1 {
+.markdown-body h1 {
   @apply text-4xl font-bold pt-6 pb-1;
 }
 
-h2 {
+.markdown-body h2 {
   @apply text-2xl font-bold pt-2 pb-1;
 }
 
-h3 {
+.markdown-body h3 {
   @apply text-xl font-bold pt-2 pb-1;
 }
 
-code.language-rust {
+.markdown-body code.language-rust {
   @apply border-l-1 border-white pl-8;
 }
 
-a {
+.markdown-body a {
   @apply underline;
 }
 
-.banner {
+.markdown-body .banner {
   @apply object-cover w-full rounded-xs h-120 object-center;
 }
 
-.language-mermaid {
+.markdown-body.language-mermaid {
   @apply flex flex-col justify-center items-center;
 }
