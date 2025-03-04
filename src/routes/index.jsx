@@ -1,3 +1,5 @@
+
+import { A } from '@solidjs/router'
 import About from '../components/about'
 import CupDonutHomo from '../components/cup-donut-homo'
 import Profile from '../components/profile'
@@ -24,10 +26,10 @@ export default function Index() {
                 </div>
                 <About />
                 <div class='space-y-2'>
-                  <a class='flex items-center space-x-2' href='/#/posts'>
+                  <A class='flex items-center space-x-2' href='/posts'>
                     <img src='/link.svg' class='invert w-6 h-6 pt-1' />
                     <span class='font-semilight text-3xl pt-1'>Posts</span>
-                  </a>
+                  </A>
                   <div class='space-y-2'>
                     <Post
                       date='2025/01/27'
@@ -35,10 +37,10 @@ export default function Index() {
                       filename='quic-and-actors-with-tokio' />
                   </div>
                 </div>
-                <a class='flex items-center space-x-2' href='/#/zettelkasten'>
+                <A class='flex items-center space-x-2' href='/zettelkasten'>
                   <img src='/link.svg' class='invert w-6 h-6 pt-1' />
                   <span class='font-semilight text-3xl pt-1'>Zettelkasten</span>
-                </a>
+                </A>
               </div>
             </div>
           </div>
