@@ -35,7 +35,7 @@ a {
   @apply underline;
 }
 
-img {
+.banner {
   @apply object-cover w-full rounded-xs h-120 object-center;
 }
 

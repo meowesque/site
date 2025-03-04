@@ -1,4 +1,4 @@
-![Puppy Programmer](/dog-programmer.png "Puppy Programmer")
+<img src="/dog-programmer.png" alt="Puppy Programmer" class="banner" />
 
 # QUIC and Actors with Tokio
 
