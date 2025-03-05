@@ -3,11 +3,11 @@ export default function SocialsBar() {
     <div class='flex justify-between w-1/5 flex-col md:flex-row md:w-full md:space-y-0 md:size-16'>
       <a class='rounded-xs hover:bg-[#1B1F24] transition-colors ease-out group duration-100 bg-white aspect-square grid items-center'
         href='https://github.com/maxinedeandrade'>
-        <img src='/github.svg' class='w-3/5 h-3/5 mx-auto group-hover:invert' />
+        <img src='/svg/github.svg' class='w-3/5 h-3/5 mx-auto group-hover:invert' />
       </a>
       <a class='rounded-xs hover:bg-[#e2432a] transition-colors ease-out duration-100 bg-white group aspect-square grid items-center'
         href='https://gitlab.com/maxinedeandrade'>
-        <img src='/gitlab.svg' class='w-3/5 h-3/5 mx-auto group-hover:invert ' />
+        <img src='/svg/gitlab.svg' class='w-3/5 h-3/5 mx-auto group-hover:invert ' />
       </a>
       <a class='aspect-square sm:size-auto md:h-full md:w-min grid items-center' href='https://youtube.com/@mdeandrade'>
         <svg

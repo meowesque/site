@@ -1,4 +1,4 @@
-<img src="/dog-programmer.png" alt="Puppy Programmer" class="banner" />
+<img src="/img/dog-programmer.png" alt="Puppy Programmer" class="banner" />
 
 # QUIC and Actors with Tokio
 

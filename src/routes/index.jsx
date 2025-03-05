@@ -25,22 +25,26 @@ export default function Index() {
                   <span class='block text-sm pt-1'>(he/she)</span>
                 </div>
                 <About />
-                <div class='space-y-2'>
-                  <A class='flex items-center space-x-2' href='/posts'>
-                    <img src='/link.svg' class='invert w-6 h-6 pt-1' />
-                    <span class='font-semilight text-3xl pt-1'>Posts</span>
-                  </A>
-                  <div class='space-y-2'>
-                    <Post
-                      date='2025/02/27'
-                      title='QUIC and Actors with Tokio'
-                      filename='quic-and-actors-with-tokio' />
+                <div class='space-y-2 lg:flex lg:flex-row'>
+                  <div class='space-y-2 lg:w-1/2'>
+                    <A class='flex items-center space-x-2' href='/posts'>
+                      <img src='/svg/link.svg' class='invert w-6 h-6 pt-1' />
+                      <span class='font-semilight text-3xl pt-1'>Posts</span>
+                    </A>
+                    <div class='space-y-2'>
+                      <Post
+                        date='2025/02/27'
+                        title='QUIC and Actors with Tokio'
+                        filename='quic-and-actors-with-tokio' />
+                    </div>
+                  </div>
+                  <div class='space-y-2 lg:w-1/2'>
+                    <A class='flex items-center space-x-2' href='/zettelkasten'>
+                      <img src='/svg/link.svg' class='invert w-6 h-6 pt-1' />
+                      <span class='font-semilight text-3xl pt-1'>Zettelkasten</span>
+                    </A>
                   </div>
                 </div>
-                <A class='flex items-center space-x-2' href='/zettelkasten'>
-                  <img src='/link.svg' class='invert w-6 h-6 pt-1' />
-                  <span class='font-semilight text-3xl pt-1'>Zettelkasten</span>
-                </A>
               </div>
             </div>
           </div>
