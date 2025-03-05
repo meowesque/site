@@ -1,7 +1,6 @@
 
 import { A } from '@solidjs/router'
 import About from '../components/about'
-import CupDonutHomo from '../components/cup-donut-homo'
 import Profile from '../components/profile'
 import SocialsBar from '../components/socials-bar'
 import Post from '../components/post'
