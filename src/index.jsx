@@ -11,6 +11,10 @@ const routes = [
   {
     path: "/posts/quic-and-actors-with-tokio",
     component: lazy(() => import("./routes/posts/quic-and-actors-with-tokio.jsx")),
+  },
+  {
+    path: "/posts/clang-efficient-source-tracking",
+    component: lazy(() => import("./routes/posts/clang-efficient-source-tracking.jsx")),
   }
 ]
 
