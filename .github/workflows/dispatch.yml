@@ -1,0 +1,14 @@
+name: Deploy site to pages
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch pages
+        id: dispatch
+        run: |
+          curl -XPOST -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/meowesque/meowesque.github.io/actions/workflows/deploy.yml/dispatches --data '{"ref": "main"}'
