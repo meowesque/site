@@ -11,6 +11,14 @@
   --font-ubuntu-sans-mono: "Ubuntu Sans Mono", monospace;
 }
 
+ol {
+  list-style-type: decimal;
+}
+
+ul {
+  list-style-type: disc;
+}
+
 .markdown-body {
   @apply py-12 px-2 space-y-6;
 }

@@ -97,24 +97,24 @@ The example project can be found [here](https://github.com/meowesque/quic-and-ac
 
 Now that we have a basic idea of what an actor looks like, let's build a basic server with QUIC! Our server will be broken into several pieces:
 
-  * [Listener](#listener) Accepts incoming clients and sets up our actors. 
+  - [Listener](#listener) Accepts incoming clients and sets up our actors. 
 
-  * [Inbound](#inbound) Recieves incoming messages from the client.
+  - [Inbound](#inbound) Recieves incoming messages from the client.
 
-  * [Outbound](#outbound) Sends messages to the client.
+  - [Outbound](#outbound) Sends messages to the client.
 
-  * [Dispatch](#dispatch) Handles each client message and acts as a switch for each actors.
+  - [Dispatch](#dispatch) Handles each client message and acts as a switch for each actors.
 
 Splitting our actors up into very basic responsibilities is convenient for multiple reasons:
 
-  * The architecture of the server becomes far more reasonable to work with when amassing more complex tasks.
+  1. The architecture of the server becomes far more reasonable to work with when amassing more complex tasks.
   
-  * Legibility is increased given that the effects of an actor is much more apparent in contrast to a monolithic 
+  2. Legibility is increased given that the effects of an actor is much more apparent in contrast to a monolithic 
   design.
 
-  * Actors provide a form of state encapsulation, keeping moving parts consolidated.
+  3. Actors provide a form of state encapsulation, keeping moving parts consolidated.
 
-  * Decoupling provides easier error recovery without sacrificing simplicity.
+  4. Decoupling provides easier error recovery without sacrificing simplicity.
 
 ### Listener
 
@@ -341,10 +341,10 @@ The purpose of this actor is to only communicate with other actors, possibly eve
 
 Overall, there are a few things I would want to improve in a production scenario:
 
-  * Buffering the outbound actor, saving flush times. This could be especially critical for high throughput scenarios.
+  1. Buffering the outbound actor, saving flush times. This could be especially critical for high throughput scenarios.
 
-  * Utilize chunking on the inbound actor for handling potentially large portions of data.
+  2. Utilize chunking on the inbound actor for handling potentially large portions of data.
 
-  * Tracking each client handle within the listener actor.
+  3. Tracking each client handle within the listener actor.
 
 Regardless, I've been really enjoying my experience implementing actors with [tokio](crates.io/crates/tokio) and [quinn](crates.io/crates/quinn).
