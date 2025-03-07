@@ -4,6 +4,8 @@
 
 After discovering [A. Rhyl, Actors with Tokio](https://ryhl.io/blog/actors-with-tokio/) in my search of architecting servers in a more modular way via common encapsulation patterns, I was delighted to finally find something that helped me understand the bigger picture. This resource made me rethink server architecture and provided valuable insights into the use of actors with Tokio. The explanations were clear, and the examples were practical, making it an excellent starting point for anyone interested in this topic. However, while it was incredibly informative, I found it did not fully satisfy my needs in my endeavors. I was left wanting more detailed guidance and advanced techniques to further enhance my server architecture.
 
+*You can find an example server and client (and necessary configuration for QUIC!) for this post [here](https://github.com/meowesque) - for simplicity sake we only go over the server's implementation.*
+
 ## Actors with Tokio
 
 The gist of [A. Rhyl, Actors with Tokio](https://ryhl.io/blog/actors-with-tokio/) is how an actor is split into a handle (also referred to as a proxy) and the task. Typically the task is an I/O operation that the handle communicates with, providing a simple interface for the programmer whilst keeping everything decoupled. For example let's first look a simple (pure) actor and handle that doesn't actually interact with the "outside world," merely producing naturals incrementally:
@@ -91,7 +93,7 @@ This is the actor's handle, responsible for spawning a task of which the actor r
 
 ## Integrating Our Actors with [quinn](https://crates.io/crates/quinn)
 
-The example project can be found [here](https://github.com/maxinedeandrade/quic-and-actors-with-tokio), where you can find the implementation of the client as well, I haven't included it here given that both the server and the client have nearly identical code when it comes to the actors listed below. 
+The example project can be found [here](https://github.com/meowesque/quic-and-actors-with-tokio), where you can find the implementation of the client as well, I haven't included it here given that both the server and the client have nearly identical code when it comes to the actors listed below. 
 
 Now that we have a basic idea of what an actor looks like, let's build a basic server with QUIC! Our server will be broken into several pieces:
 
@@ -165,7 +167,7 @@ impl Handle {
 }
 ```
 
-[Source](https://github.com/maxinedeandrade/quic-and-actors-with-tokio/blob/main/crates/server/src/actors/listener.rs)
+[Source](https://github.com/meowesque/quic-and-actors-with-tokio/blob/main/crates/server/src/actors/listener.rs)
 
 Within `Actor::run` whenever we accept an incomming connection, we'll accept bidirectional channels to seperate recieving and sending data into two actors: [Inbound](#inbound) and [Outbound](#outbound). The [inbound actor](#inbound) will be equipped with its own newly created [dispatch](#dispatch) actor handle.
 
@@ -223,7 +225,7 @@ impl Handle {
 }
 ```
 
-[Source](https://github.com/maxinedeandrade/quic-and-actors-with-tokio/blob/main/crates/server/src/actors/inbound.rs)
+[Source](https://github.com/meowesque/quic-and-actors-with-tokio/blob/main/crates/server/src/actors/inbound.rs)
 
 This our first seemingly complex actor, the goal here is to receive incoming data and deserialize it with [bitcode](crates.io/crates/bitcode) and send it off to be dispatched. Any deserialization crate (like [bincode](crates.io/crates/bincode)) will do. For performance and memory efficient applications that need to scale, [bitcode](crates.io/crates/bitcode) may be preferrable.  
 
@@ -282,7 +284,7 @@ impl Handle {
 }
 ```
 
-[Source](https://github.com/maxinedeandrade/quic-and-actors-with-tokio/blob/main/crates/server/src/actors/outbound.rs)
+[Source](https://github.com/meowesque/quic-and-actors-with-tokio/blob/main/crates/server/src/actors/outbound.rs)
 
 This actor is trivial, existing only to encode messages and send them to the channel.
 
@@ -331,7 +333,7 @@ impl Handle {
 }
 ```
 
-[Source](https://github.com/maxinedeandrade/quic-and-actors-with-tokio/blob/main/crates/server/src/actors/dispatch.rs)
+[Source](https://github.com/meowesque/quic-and-actors-with-tokio/blob/main/crates/server/src/actors/dispatch.rs)
 
 The purpose of this actor is to only communicate with other actors, possibly even keeping track of certain events (like authentication).
 

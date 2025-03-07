@@ -20,7 +20,7 @@ export default function Index() {
               <div class='xl:max-w-2/3 space-y-4'>
                 <div class='space-y-1'>
                   <h1 class='font-semilight text-4xl'>Maxine DeAndrade</h1>
-                  <span class="font-ubuntu-sans-mono block text-medium">(λ<span class="text-[#B06DBF]">x</span>.λ<span class="text-[#729FE4]">y</span>.&lt;<span class="text-[#B06DBF]">x</span>@<span class="text-[#729FE4]">y</span>.com&gt;) <span class="text-[#B06DBF]">deandrade</span> <span class="text-[#729FE4]">posteo</span></span>
+                  <span class="font-ubuntu-sans-mono block text-medium">(λ<span class="text-[#B06DBF]">x</span>.λ<span class="text-[#729FE4]">y</span>.&lt;<span class="text-[#B06DBF]">x</span>@<span class="text-[#729FE4]">y</span>.esq&gt;) <span class="text-[#B06DBF]">md</span> <span class="text-[#729FE4]">meow</span></span>
                   <span class='block text-sm pt-1'>(he/she)</span>
                 </div>
                 <About />
