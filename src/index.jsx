@@ -31,6 +31,10 @@ const routes = [
   {
     path: "/reading-lists/spj-paper-trail",
     component: lazy(() => import("./routes/reading-lists/spj-paper-trail.jsx")),
+  },
+  {
+    path: "/posts/vanity-repositories-for-github-pages",
+    component: lazy(() => import("./routes/posts/vanity-repositories-for-github-pages.jsx")),
   }
 ]
 

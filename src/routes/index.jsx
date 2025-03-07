@@ -33,6 +33,10 @@ export default function Index() {
                     </A>
                     <div class='space-y-2'>
                       <Post
+                        date='2025/03/07'
+                        title='Vanity Repositories for GitHub Pages'
+                        filename='vanity-repositories-for-github-pages' />
+                      <Post
                         date='2025/03/06'
                         title='Clang: Efficient Source Tracking'
                         filename='clang-efficient-source-tracking' />
