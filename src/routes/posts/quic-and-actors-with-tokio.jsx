@@ -12,7 +12,7 @@ export default function QuicAndActorsWithTokio() {
   return (
     <>
       <div class='min-h-screen bg-black text-white'>
-        <div class='container w-full md:w-3/4 lg:w-1/2 mx-auto'>
+        <div class='container w-full md:w-3/4 lg:w-216 mx-auto'>
           <Post />
         </div>
       </div>

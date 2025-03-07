@@ -48,3 +48,4 @@ static SourceLocation getMacroLoc(UIntTy ID) {
 
 Seeing the neat tricks that clang has given us, here's how we'd implement this in Rust:
 
+WIP!
