@@ -15,6 +15,22 @@ const routes = [
   {
     path: "/posts/clang-efficient-source-tracking",
     component: lazy(() => import("./routes/posts/clang-efficient-source-tracking.jsx")),
+  },
+  {
+    path: "/reading-lists/scheme-implementation-details",
+    component: lazy(() => import("./routes/reading-lists/scheme-implementation-details.jsx")),
+  },
+  {
+    path: "/reading-lists/category-theory",
+    component: lazy(() => import("./routes/reading-lists/category-theory.jsx")),
+  },
+  {
+    path: "/reading-lists/type-theory",
+    component: lazy(() => import("./routes/reading-lists/type-theory.jsx")),
+  },
+  {
+    path: "/reading-lists/spj-paper-trail",
+    component: lazy(() => import("./routes/reading-lists/spj-paper-trail.jsx")),
   }
 ]
 

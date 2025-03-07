@@ -4,6 +4,7 @@ import About from '../components/about'
 import Profile from '../components/profile'
 import SocialsBar from '../components/socials-bar'
 import Post from '../components/post'
+import ReadingList from '../components/reading-list'
 import './index.css'
 
 export default function Index() {
@@ -24,8 +25,8 @@ export default function Index() {
                   <span class='block text-sm pt-1'>(he/she)</span>
                 </div>
                 <About />
-                <div class='space-y-2 lg:flex lg:flex-row'>
-                  <div class='space-y-2 lg:w-1/2'>
+                <div class='space-y-2 lg:grid lg:grid-cols-2 lg:gap-4'>
+                  <div class='space-y-2'>
                     <A class='flex items-center space-x-2' href='/posts'>
                       <img src='/svg/link.svg' class='invert w-6 h-6 pt-1' />
                       <span class='font-semilight text-3xl pt-1'>Posts</span>
@@ -41,11 +42,23 @@ export default function Index() {
                         filename='quic-and-actors-with-tokio' />
                     </div>
                   </div>
-                  <div class='space-y-2 lg:w-1/2'>
+                  <div class='space-y-2'>
                     <A class='flex items-center space-x-2' href='/zettelkasten'>
                       <img src='/svg/link.svg' class='invert w-6 h-6 pt-1' />
                       <span class='font-semilight text-3xl pt-1'>Zettelkasten</span>
                     </A>
+                  </div>
+                  <div class='space-y-2'>
+                    <A class='flex items-center space-x-2 whitespace-nowrap' href='/reading-lists'>
+                      <img src='/svg/link.svg' class='invert w-6 h-6 pt-1' />
+                      <span class='font-semilight text-3xl pt-1'>Reading Lists</span>
+                    </A>
+                    <div class='space-y-2'>
+                      <ReadingList title='Category Theory' filename='category-theory'/>
+                      <ReadingList title='Type Theory' filename='type-theory'/>
+                      <ReadingList title='Scheme Implementation Details' filename='scheme-implementation-details'/>
+                      <ReadingList title='SPJ Paper Trail' filename='spj-paper-trail'/>
+                    </div>
                   </div>
                 </div>
               </div>
