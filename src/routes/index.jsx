@@ -61,6 +61,7 @@ export default function Index() {
                       <ReadingList title='Category Theory' filename='category-theory'/>
                       <ReadingList title='Type Theory' filename='type-theory'/>
                       <ReadingList title='Scheme Implementation Details' filename='scheme-implementation-details'/>
+                      <ReadingList title='Algebraic Geometry' filename='algebraic-geometry'/>
                       <ReadingList title='SPJ Paper Trail' filename='spj-paper-trail'/>
                     </div>
                   </div>

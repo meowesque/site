@@ -33,6 +33,10 @@ const routes = [
     component: lazy(() => import("./routes/reading-lists/spj-paper-trail.jsx")),
   },
   {
+    path: "/reading-lists/algebraic-geometry",
+    component: lazy(() => import("./routes/reading-lists/algebraic-geometry.jsx")),
+  },
+  {
     path: "/posts/vanity-repositories-for-github-pages",
     component: lazy(() => import("./routes/posts/vanity-repositories-for-github-pages.jsx")),
   }
