@@ -37,10 +37,6 @@ export default function Index() {
                         title='Vanity Repositories for GitHub Pages'
                         filename='vanity-repositories-for-github-pages' />
                       <Post
-                        date='2025/03/06'
-                        title='Clang: Efficient Source Tracking'
-                        filename='clang-efficient-source-tracking' />
-                      <Post
                         date='2025/02/27'
                         title='QUIC and Actors with Tokio'
                         filename='quic-and-actors-with-tokio' />
