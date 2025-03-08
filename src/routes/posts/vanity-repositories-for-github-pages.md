@@ -73,7 +73,7 @@ In our site repository where the webapp is stored, we have an action:
 ### Site Repository Action
 
 ```yaml
-name: Deploy site to pages
+name: Dispatch pages
 
 on:
   push:
