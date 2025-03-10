@@ -6,6 +6,7 @@ import SocialsBar from '../components/socials-bar'
 import Post from '../components/post'
 import ReadingList from '../components/reading-list'
 import './index.css'
+import Project from '../components/project'
 
 export default function Index() {
   return (
@@ -27,10 +28,15 @@ export default function Index() {
                 <About />
                 <div class='space-y-2 lg:grid lg:grid-cols-2 lg:gap-4'>
                   <div class='space-y-2'>
-                    <A class='flex items-center space-x-2' href='/posts'>
-                      <img src='/svg/link.svg' class='invert w-6 h-6 pt-1' />
-                      <span class='font-semilight text-3xl pt-1'>Posts</span>
-                    </A>
+                    <div class='flex items-center space-x-2'>
+                      <A class='pt-1' href='/projects/rss.xml'>
+                        <img src='/svg/rss.svg' class='invert w-3 h-3' />
+                      </A>
+                      <A class='flex items-center space-x-2' href='/posts'>
+                        <img src='/svg/link.svg' class='invert w-6 h-6 pt-1' />
+                        <span class='font-semilight text-3xl pt-1'>Posts</span>
+                      </A>
+                    </div>
                     <div class='space-y-2'>
                       <Post
                         date='2025/03/07'
@@ -42,6 +48,22 @@ export default function Index() {
                         title='QUIC and Actors with Tokio'
                         filename='quic-and-actors-with-tokio'
                         description='Introduction to quinn-rs and actors in Rust' />
+                    </div>
+                  </div>
+                  <div class='space-y-2'>
+                    <A class='flex items-center space-x-2' href='/projects'>
+                      <img src='/svg/link.svg' class='invert w-6 h-6 pt-1' />
+                      <span class='font-semilight text-3xl pt-1'>Projects</span>
+                    </A>
+                    <div class='space-y-2'>
+                      <Project 
+                        title='catk'
+                        description='C Analysis Toolkit'
+                        href='https://github.com/meowesque/catk' />
+                      <Project 
+                        title='cfront'
+                        description='Batteries included frontend for C'
+                        href='https://github.com/meowesque/cfront' />
                     </div>
                   </div>
                   <div class='space-y-2'>
