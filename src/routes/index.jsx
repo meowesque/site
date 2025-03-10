@@ -35,11 +35,13 @@ export default function Index() {
                       <Post
                         date='2025/03/07'
                         title='Vanity Repositories for GitHub Pages'
-                        filename='vanity-repositories-for-github-pages' />
+                        filename='vanity-repositories-for-github-pages'
+                        description='Deploying GitHub Pages from a separate repository' />
                       <Post
                         date='2025/02/27'
                         title='QUIC and Actors with Tokio'
-                        filename='quic-and-actors-with-tokio' />
+                        filename='quic-and-actors-with-tokio'
+                        description='Introduction to quinn-rs and actors in Rust' />
                     </div>
                   </div>
                   <div class='space-y-2'>
