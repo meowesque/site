@@ -29,7 +29,7 @@ export default function Index() {
                 <div class='space-y-2 lg:grid lg:grid-cols-2 lg:gap-4'>
                   <div class='space-y-2'>
                     <div class='flex items-center space-x-2'>
-                      <A class='pt-1' href='/projects/rss.xml'>
+                      <A class='pt-1' href='/posts/rss.xml'>
                         <img src='/svg/rss.svg' class='invert w-3 h-3' />
                       </A>
                       <A class='flex items-center space-x-2' href='/posts'>
