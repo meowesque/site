@@ -19,7 +19,7 @@ export default function Index() {
               <SocialsBar />
             </div>
             <div>
-              <div class='xl:max-w-2/3 space-y-4'>
+              <div class='space-y-4'>
                 <div class='space-y-1'>
                   <div class='flex flex-row items-center space-x-3'>
                     <h1 class='font-semilight text-4xl'>Maxine DeAndrade</h1>
