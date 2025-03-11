@@ -30,7 +30,6 @@ export default function Index() {
                   <span class="font-ubuntu-sans-mono block text-medium">(λ<span class="text-[#B06DBF]">x</span>.λ<span class="text-[#729FE4]">y</span>.&lt;<span class="text-[#B06DBF]">x</span>@<span class="text-[#729FE4]">y</span>.esq&gt;) <span class="text-[#B06DBF]">md</span> <span class="text-[#729FE4]">meow</span></span>
                   <span class='block text-sm pt-1'>(he/she)</span>
                 </div>
-                <About />
                 <div class='space-y-2 lg:grid lg:grid-cols-2 lg:gap-4'>
                   <div class='space-y-2'>
                     <div class='flex items-center space-x-2'>
