@@ -24,7 +24,7 @@ export default function Index() {
                   <div class='flex flex-row items-center space-x-3'>
                     <h1 class='font-semilight text-4xl'>Maxine DeAndrade</h1>
                     <a href='/rss.xml'>
-                      <img src='/svg/rss.svg' class='invert w-6 h-6 mt-1' />
+                      <img src='/svg/rss.svg' class='invert w-7 h-7 mt-0.5' />
                     </a>
                   </div>
                   <span class="font-ubuntu-sans-mono block text-medium">(λ<span class="text-[#B06DBF]">x</span>.λ<span class="text-[#729FE4]">y</span>.&lt;<span class="text-[#B06DBF]">x</span>@<span class="text-[#729FE4]">y</span>.esq&gt;) <span class="text-[#B06DBF]">md</span> <span class="text-[#729FE4]">meow</span></span>
