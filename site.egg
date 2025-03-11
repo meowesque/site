@@ -1,0 +1,10 @@
+((version "0.1.0")
+ (synopsis "Personal website")
+ (dependencies r7rs)
+ (component-options (csc-options -X r7rs -R r7rs))
+ (components 
+  (program main
+    (source "./src/main.scm")
+    (component-dependencies xml))
+  (extension xml
+    (source "./src/xml.scm"))))

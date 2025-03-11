@@ -1,0 +1,7 @@
+main
+*.install.sh
+*.build.sh
+*.import.scm
+*.link
+*.so
+*.o
