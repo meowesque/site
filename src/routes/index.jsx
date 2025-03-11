@@ -21,7 +21,12 @@ export default function Index() {
             <div>
               <div class='xl:max-w-2/3 space-y-4'>
                 <div class='space-y-1'>
-                  <h1 class='font-semilight text-4xl'>Maxine DeAndrade</h1>
+                  <div class='flex flex-row items-center space-x-3'>
+                    <h1 class='font-semilight text-4xl'>Maxine DeAndrade</h1>
+                    <a href='/rss.xml'>
+                      <img src='/svg/rss.svg' class='invert w-6 h-6 mt-1' />
+                    </a>
+                  </div>
                   <span class="font-ubuntu-sans-mono block text-medium">(λ<span class="text-[#B06DBF]">x</span>.λ<span class="text-[#729FE4]">y</span>.&lt;<span class="text-[#B06DBF]">x</span>@<span class="text-[#729FE4]">y</span>.esq&gt;) <span class="text-[#B06DBF]">md</span> <span class="text-[#729FE4]">meow</span></span>
                   <span class='block text-sm pt-1'>(he/she)</span>
                 </div>
@@ -29,9 +34,6 @@ export default function Index() {
                 <div class='space-y-2 lg:grid lg:grid-cols-2 lg:gap-4'>
                   <div class='space-y-2'>
                     <div class='flex items-center space-x-2'>
-                      <A class='pt-1' href='/posts/rss.xml'>
-                        <img src='/svg/rss.svg' class='invert w-3 h-3' />
-                      </A>
                       <A class='flex items-center space-x-2' href='/posts'>
                         <img src='/svg/link.svg' class='invert w-6 h-6 pt-1' />
                         <span class='font-semilight text-3xl pt-1'>Posts</span>
