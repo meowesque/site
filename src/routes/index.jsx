@@ -59,13 +59,17 @@ export default function Index() {
                     </A>
                     <div class='space-y-2'>
                       <Project 
+                        title='ivy'
+                        description='Remote backup and restoration management tool'
+                        href='https://github.com/meowesque/ivy' />
+                      <Project 
                         title='catk'
                         description='C Analysis Toolkit'
                         href='https://github.com/meowesque/catk' />
                       <Project 
-                        title='cfront'
-                        description='Batteries included frontend for C'
-                        href='https://github.com/meowesque/cfront' />
+                        title='isopod'
+                        description='ISO 9660 library'
+                        href='https://github.com/meowesque/isopod' />
                     </div>
                   </div>
                   <div class='space-y-2'>
