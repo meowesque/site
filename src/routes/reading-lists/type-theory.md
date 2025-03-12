@@ -7,6 +7,8 @@
 ## Metatheory
 
 - [Type Theory in Type Theory using Quotient Inductive Types](https://akaposi.github.io/tt-in-tt.pdf)
+- [MetaCoq](https://metacoq.github.io/)
+- [Formalisation and Meta-Theory of Type Theory](https://github.com/TheoWinterhalter/phd-thesis/releases/download/v1.2.1/TheoWinterhalter-PhD-v1.2.1.pdf)
 
 ## Homotopy Type Theory
 
