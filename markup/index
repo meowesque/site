@@ -1,0 +1,7 @@
+\(document-type! 'page)
+
+\(mode! 'paragraph)
+
+Hello, world!
+
+\(footer)

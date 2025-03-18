@@ -1,4 +1,6 @@
-(import (scheme base))
+(import 
+  (scheme base)
+  (prefix (markup) markup:)
+) ; import 
 
-(display "Hello, world!")
-(newline)
+(markup:parse-file "markup/index")

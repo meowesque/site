@@ -7,4 +7,7 @@
     (source "./src/main.scm")
     (component-dependencies xml))
   (extension xml
-    (source "./src/xml.scm"))))
+    (source "./src/xml.scm"))
+  (extension markup
+    (source "./src/markup.scm"))
+    (component-dependencies xml)))
