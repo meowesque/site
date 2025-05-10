@@ -57,18 +57,14 @@ export default function Index() {
                       <span class='font-semilight text-3xl pt-1'>Projects</span>
                     </A>
                     <div class='space-y-2'>
-                      <Project 
-                        title='ivy'
-                        description='Remote backup and restoration management tool'
-                        href='https://github.com/meowesque/ivy' />
+                      <Project
+                        title='OmniCloud'
+                        description='Zero-config platform for deploying microservices anywhere'
+                        href='https://omnicloud.sh' />
                       <Project 
                         title='catk'
                         description='C Analysis Toolkit'
                         href='https://github.com/meowesque/catk' />
-                      <Project 
-                        title='isopod'
-                        description='ISO 9660 library'
-                        href='https://github.com/meowesque/isopod' />
                     </div>
                   </div>
                   <div class='space-y-2'>
